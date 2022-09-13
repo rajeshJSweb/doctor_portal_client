@@ -15,7 +15,7 @@ const AvailableApointment = ({date}) => {
     return (
         <div>
             <p>You picked {format(date, 'PP')}.</p>;
-           <div className='grid lg:grid-cols-3 gap-8 mx-20'>
+           <div className='grid lg:grid-cols-3 gap-8 mx-5 lg:mx-20'>
            {
                 services.map(service => <Services
                 key={service._id}
