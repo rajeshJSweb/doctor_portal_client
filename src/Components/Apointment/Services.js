@@ -1,28 +1,24 @@
 import React from 'react';
 
-const Services = ({service, setTreatment}) => {
-    const {name, slots}=service;
+const Services = ({service}) => {
+    const {name, slots}=service
     return (
-        <div class="card shadow-xl">
-        <div class="card-body items-center text-center">
-            <h2 class="card-title text-secondary">{name}</h2>
-            <p>{slots[3]}</p>
-            <p>
-                {
+        <div>
+            <div class="card card-side bg-base-100 shadow-xl">
+            <div class="card-body text-center">
+                <h2 class="card-title text-secondary text-2xl text-end">{name}</h2>
+                <p>{
                     slots.length
                     ?
                     <span>{slots.length} Available Slots</span>
                     :
-                    <span className='text-red-500 font-bold'>There is no slots</span>
-                }
-            </p>
-            <div class="card-actions">
-            <label disabled={slots.length===0}
-            onClick={() => setTreatment(service)}
-            for="booking-modal"
-            class="btn modal-button btn-secondary">Book Apointment</label>
+                    <span>There are no slots</span>
+                    }</p>
+                <div class="card-actions justify-center">
+                    <button className='btn btn-primary bg-gradient-to-r from-secondary to-primary ...'>Book Apointment</button>
+                </div>
             </div>
-        </div>
+            </div>
         </div>
     );
 };
