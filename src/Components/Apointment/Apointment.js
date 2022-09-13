@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import ApointmentBanner from './ApointmentBanner';
 import AvailableApointment from './AvailableApointment';
+import BookingSection from './BookingSection';
 import Services from './Services';
 
 const Apointment = () => {
