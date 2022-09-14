@@ -8,7 +8,7 @@ const Footer = () => {
             <footer style={{
             background: `url (${footer})`,
             backgroundSize:'cover' 
-        }} class="footer flex-row lg:flex-row-reverse justify-around py-7">
+        }} class="footer flex-row lg:flex-row-reverse justify-around py-7 shadow-3xl">
                 <div>
                     <span class="text-secondary text-xl font-bold">Services</span> 
                     <a class="link link-hover hover:font-bold">Branding</a>

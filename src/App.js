@@ -9,6 +9,7 @@ import Contact from './Components/Shared/Contact/Contact';
 import Apointment from './Components/Apointment/Apointment';
 import Footer from './Components/Shared/Footer/Footer';
 import SignUp from './Components/Shared/SignUp/SignUp';
+import RequireAuth from './Components/Shared/Login/RequireAuth';
 
 function App() {
   return (
@@ -18,7 +19,11 @@ function App() {
         <Route path="" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/apointment" element={<Apointment />} />
+        <Route path="/apointment" element={
+          <RequireAuth>
+            <Apointment />
+          </RequireAuth>
+        } />
         <Route path="/review" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />

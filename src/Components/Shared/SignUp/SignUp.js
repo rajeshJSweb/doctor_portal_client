@@ -1,18 +1,22 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from './../../../firebase.init';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-      ] = useSignInWithEmailAndPassword(auth);
+      ] = useCreateUserWithEmailAndPassword(auth);
+
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const navigate = useNavigate();
+
     let signInError;
 
     if(loading){
@@ -25,9 +29,11 @@ const SignUp = () => {
         console.log(googleUser)
     }
 
-    const onSubmit = data => {
+    const onSubmit =async data => {
         console.log(data);
-        signInWithEmailAndPassword(data.email, data.password);
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.fullName });
+          navigate('/apointment')
     };
 
 
@@ -35,7 +41,7 @@ const SignUp = () => {
         <div className='flex h-screen justify-center items-center'>
             <div class="card w-96 bg-violet-200 shadow-xl">
             <div class="card-body">
-                <h2 class="text-center text-3xl font-bold text-white">Login</h2>
+                <h2 class="text-center text-3xl font-bold text-white">Sign Up</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div class="form-control w-full max-w-xs">
                         <label class="label">
@@ -105,9 +111,9 @@ const SignUp = () => {
                     <input 
                      className='btn w-full max-w-xs' 
                      type="submit" 
-                     value="login" />
+                     value="sign up" />
                 </form>
-                <p>Already have an account? <Link to="/login">| <span className='text-secondary'>Login your account</span></Link></p>
+                <p>Already have an account? <Link to="/login">| <span className='text-sky-700'>Login</span></Link></p>
                 <div className='divider'>OR</div>
                 <button 
                 onClick={()=> signInWithGoogle()} 
