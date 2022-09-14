@@ -4,7 +4,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import auth from './../../../firebase.init';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const SignUp = () => {
     const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
@@ -30,6 +30,7 @@ const Login = () => {
         signInWithEmailAndPassword(data.email, data.password);
     };
 
+
     return (
         <div className='flex h-screen justify-center items-center'>
             <div class="card w-96 bg-violet-200 shadow-xl">
@@ -37,6 +38,23 @@ const Login = () => {
                 <h2 class="text-center text-3xl font-bold text-white">Login</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div class="form-control w-full max-w-xs">
+                        <label class="label">
+                            <span class="label-text text-xl">Full Name</span>
+                        </label>
+                        <input 
+                        type="fullName" 
+                        placeholder="Full Name" 
+                        class="input input-bordered w-full max-w-xs" 
+                        {...register("fullName", {
+                            required:{
+                                value:true,
+                                message:'Name is required'
+                            }
+                          })} 
+                        />
+                        {errors.fullName?.type === 'required' && <span className='text-start text-red-800'>{errors.fullName.message}</span>}
+                        
+                        
                         <label class="label">
                             <span class="label-text text-xl">Email</span>
                         </label>
@@ -57,6 +75,7 @@ const Login = () => {
                         />
                         {errors.email?.type === 'required' && <span className='text-start text-red-800'>{errors.email.message}</span>}
                         {errors.email?.type === 'pattern' && <span className='text-start text-red-800'>{errors.email.message}</span>}
+                        
                         <label class="label">
                             <span class="label-text text-xl">Password</span>
                         </label>
@@ -78,16 +97,17 @@ const Login = () => {
                         {errors.password?.type === 'required' && <span className='text-start text-red-800'>{errors.password.message}</span>}
                         {errors.password?.type === 'minLength' && <span className='text-start text-red-800'>{errors.password.message}</span>}
                         <label class="label">
-                            <span class="label-text-alt">Forgot password?</span>
+                            
                         </label>
                     </div>
+
                     {signInError}
                     <input 
                      className='btn w-full max-w-xs' 
                      type="submit" 
                      value="login" />
                 </form>
-                <p>New to Doctors Portal <Link to="/signUp">| <span className='text-secondary'>create an account</span></Link></p>
+                <p>Already have an account? <Link to="/login">| <span className='text-secondary'>Login your account</span></Link></p>
                 <div className='divider'>OR</div>
                 <button 
                 onClick={()=> signInWithGoogle()} 
@@ -98,4 +118,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;

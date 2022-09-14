@@ -17,7 +17,7 @@ const BookingSection = ({treatment,date,setTreatment}) => {
             <div class="modal modal-bottom sm:modal-middle">
             <div class="modal-box">
             <label for="booking-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                <h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
+                <h3 class="font-bold text-lg">You Have Selected: {name}</h3>
                 <div className='flex flex-col space-y-4 justify-center mt-10'>
                     <form onSubmit={handleBooking} className='space-y-4'>
                         <input type="text" disabled value={format(date, 'PP')} class="input input-bordered w-full max-w-xs" />
